@@ -10,6 +10,7 @@ import FullStackProjects from './pages/FullStackProjects';
 import Certificates from './pages/Certificates';
 import Experience from './pages/Experience';
 import Contact from './pages/Contact';
+import Resume from './pages/Resume';
 import NotFound from './pages/NotFound';
 import Login from './pages/admin/Login';
 import Dashboard from './pages/admin/Dashboard';
@@ -35,6 +36,7 @@ export default function App() {
           <Route path="/fullstack-projects" element={<FullStackProjects />} />
           <Route path="/certificates" element={<Certificates />} />
           <Route path="/experience" element={<Experience />} />
+          <Route path="/resume" element={<Resume />} />
           <Route path="/contact" element={<Contact />} />
         </Route>
         <Route path="/admin/login" element={<Login />} />

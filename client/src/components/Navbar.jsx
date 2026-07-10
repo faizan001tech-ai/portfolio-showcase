@@ -8,7 +8,7 @@ const navLinks = [
   { path: '/frontend-projects', label: 'Frontend' },
   { path: '/fullstack-projects', label: 'Fullstack' },
   { path: '/services', label: 'AI' },
-  { path: '/about', label: 'Resume' },
+  { path: '/resume', label: 'Resume' },
 ];
 
 export default function Navbar() {
