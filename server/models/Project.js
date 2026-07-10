@@ -8,7 +8,7 @@ const projectSchema = new mongoose.Schema(
     image: { type: String, default: '' },
     githubUrl: { type: String, default: '' },
     liveUrl: { type: String, default: '' },
-    category: { type: String, enum: ['frontend', 'fullstack'], required: true },
+    category: { type: String, enum: ['frontend', 'fullstack', 'ai'], required: true },
     featured: { type: Boolean, default: false },
   },
   { timestamps: true }

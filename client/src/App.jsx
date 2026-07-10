@@ -7,6 +7,7 @@ import Skills from './pages/Skills';
 import Services from './pages/Services';
 import FrontendProjects from './pages/FrontendProjects';
 import FullStackProjects from './pages/FullStackProjects';
+import AIProjects from './pages/AIProjects';
 import Certificates from './pages/Certificates';
 import Experience from './pages/Experience';
 import Contact from './pages/Contact';
@@ -34,6 +35,7 @@ export default function App() {
           <Route path="/services" element={<Services />} />
           <Route path="/frontend-projects" element={<FrontendProjects />} />
           <Route path="/fullstack-projects" element={<FullStackProjects />} />
+          <Route path="/ai-projects" element={<AIProjects />} />
           <Route path="/certificates" element={<Certificates />} />
           <Route path="/experience" element={<Experience />} />
           <Route path="/resume" element={<Resume />} />

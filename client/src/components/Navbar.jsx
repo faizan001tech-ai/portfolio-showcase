@@ -7,7 +7,7 @@ import { FaGithub, FaLinkedin, FaUserLock } from 'react-icons/fa';
 const navLinks = [
   { path: '/frontend-projects', label: 'Frontend' },
   { path: '/fullstack-projects', label: 'Fullstack' },
-  { path: '/services', label: 'AI' },
+  { path: '/ai-projects', label: 'AI' },
   { path: '/resume', label: 'Resume' },
 ];
 
