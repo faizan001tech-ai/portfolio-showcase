@@ -15,7 +15,7 @@ export default function Resume() {
 
           <GlassCard>
             <div className="space-y-4">
-              <h2 className="text-3xl font-bold text-white">Muhammad Faizan</h2>
+              <h2 className="text-3xl font-bold text-white"> Faizan jahangir</h2>
               <p className="text-gray-400">faizan001.tech@gmail.com | +92 314 9884870 | github.com/faizan001 | linkedin.com/in/faizan001</p>
             </div>
           </GlassCard>
@@ -35,7 +35,7 @@ export default function Resume() {
             <div className="space-y-4">
               <h3 className="text-2xl font-semibold text-white">Education</h3>
               <div className="space-y-2 text-gray-400">
-                <p className="font-semibold text-white">F.Sc (Pre-Engineering)</p>
+                <p className="font-semibold text-white">F.Sc </p>
                 <p>SMIT Peshawar</p>
                 <p className="text-sm text-gray-500">MERN Stack Development Course (15 Months)</p>
               </div>
