@@ -14,7 +14,11 @@ export default function Services() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    api.get('/services').then((r) => setServices(r.data.data.services)).catch(() => {}).finally(() => setLoading(false));
+    api.get('/services').then((r) => {
+      if (r.data?.data?.services) {
+        setServices(r.data.data.services);
+      }
+    }).catch(() => {}).finally(() => setLoading(false));
   }, []);
 
   return (

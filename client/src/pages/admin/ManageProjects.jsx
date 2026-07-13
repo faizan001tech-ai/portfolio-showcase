@@ -15,7 +15,11 @@ export default function ManageProjects() {
   const [filter, setFilter] = useState('all');
   const fileRef = useRef(null);
 
-  const fetch = () => api.get('/projects', { params: { limit: 100 } }).then((r) => setItems(r.data.data.projects)).catch(() => {});
+  const fetch = () => api.get('/projects', { params: { limit: 100 } }).then((r) => {
+    if (r.data?.data?.projects) {
+      setItems(r.data.data.projects);
+    }
+  }).catch(() => {});
   useEffect(() => { fetch(); }, []);
 
   const filteredItems = filter === 'all' ? items : items.filter(i => i.category === filter);

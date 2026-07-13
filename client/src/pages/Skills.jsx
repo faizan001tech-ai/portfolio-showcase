@@ -19,7 +19,11 @@ export default function Skills() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    api.get('/skills').then((r) => setSkills(r.data.data.skills)).catch(() => {}).finally(() => setLoading(false));
+    api.get('/skills').then((r) => {
+      if (r.data?.data?.skills) {
+        setSkills(r.data.data.skills);
+      }
+    }).catch(() => {}).finally(() => setLoading(false));
   }, []);
 
   const categories = [...new Set(skills.map((s) => s.category))];

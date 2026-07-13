@@ -13,7 +13,11 @@ export default function Experience() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    api.get('/experiences').then((r) => setExperiences(r.data.data.experiences)).catch(() => {}).finally(() => setLoading(false));
+    api.get('/experiences').then((r) => {
+      if (r.data?.data?.experiences) {
+        setExperiences(r.data.data.experiences);
+      }
+    }).catch(() => {}).finally(() => setLoading(false));
   }, []);
 
   return (

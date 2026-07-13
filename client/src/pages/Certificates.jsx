@@ -12,7 +12,11 @@ export default function Certificates() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    api.get('/certificates').then((r) => setCerts(r.data.data.certificates)).catch(() => {}).finally(() => setLoading(false));
+    api.get('/certificates').then((r) => {
+      if (r.data?.data?.certificates) {
+        setCerts(r.data.data.certificates);
+      }
+    }).catch(() => {}).finally(() => setLoading(false));
   }, []);
 
   return (

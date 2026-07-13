@@ -112,7 +112,11 @@ export default function Home() {
   const [stats, setStats] = useState({ projects: 0, skills: 0, certificates: 0 });
 
   useEffect(() => {
-    api.get('/settings/stats').then((r) => setStats(r.data.data)).catch(() => {});
+    api.get('/settings/stats').then((r) => {
+      if (r.data?.data) {
+        setStats(r.data.data);
+      }
+    }).catch(() => {});
   }, []);
 
   return (
