@@ -32,8 +32,13 @@ function ProjectsPage({ category, title, subtitle, seoPath }) {
     setError(null);
     api.get('/projects', { params: { category, search, sort, page, limit: 9 } })
       .then((r) => {
-        setProjects(r.data.data.projects);
-        setTotalPages(r.data.data.pages);
+        if (r.data?.data?.projects) {
+          setProjects(r.data.data.projects || []);
+          setTotalPages(r.data.data.pages || 1);
+        } else {
+          console.error('Unexpected API response structure:', r.data);
+          setError('Invalid response from server. Please try again.');
+        }
       })
       .catch((err) => {
         console.error('Failed to fetch projects:', err);
