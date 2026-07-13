@@ -12,6 +12,7 @@ import api from '../services/api';
 export default function FullStackProjects() {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [search, setSearch] = useState('');
   const [sort, setSort] = useState('newest');
   const [page, setPage] = useState(1);
@@ -20,9 +21,13 @@ export default function FullStackProjects() {
 
   useEffect(() => {
     setLoading(true);
+    setError(null);
     api.get('/projects', { params: { category: 'fullstack', search, sort, page, limit: 9 } })
       .then((r) => { setProjects(r.data.data.projects); setTotalPages(r.data.data.pages); })
-      .catch(() => {}).finally(() => setLoading(false));
+      .catch((err) => {
+        console.error('Failed to fetch projects:', err);
+        setError('Failed to load projects. Please check your connection and try again.');
+      }).finally(() => setLoading(false));
   }, [search, sort, page]);
 
   return (
@@ -43,7 +48,17 @@ export default function FullStackProjects() {
             </select>
           </div>
 
-          {loading ? <LoadingSkeleton count={6} /> : projects.length === 0 ? (
+          {loading ? <LoadingSkeleton count={6} /> : error ? (
+            <div className="glass rounded-2xl p-12 text-center">
+              <p className="text-red-400 mb-4">{error}</p>
+              <button
+                onClick={() => window.location.reload()}
+                className="px-6 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors"
+              >
+                Retry
+              </button>
+            </div>
+          ) : projects.length === 0 ? (
             <p className="text-center text-gray-500">No projects found.</p>
           ) : (
             <>

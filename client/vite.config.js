@@ -10,4 +10,6 @@ export default defineConfig({
       '/uploads': 'http://localhost:5000',
     },
   },
+  // Remove proxy configuration for production builds
+  // In production, API calls go directly to VITE_API_URL
 });
