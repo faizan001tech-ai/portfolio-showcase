@@ -19,9 +19,48 @@ if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir, { recursive: true });
 // Connect DB
 connectDB();
 
+// Log FRONTEND_URL on startup
+console.log('=== CORS Configuration ===');
+console.log('FRONTEND_URL:', process.env.FRONTEND_URL);
+console.log('==========================');
+
 // Middleware
 app.use(helmet());
-app.use(cors({ origin: process.env.FRONTEND_URL, credentials: true }));
+
+// CORS Configuration - Support multiple origins
+const allowedOrigins = [
+  process.env.FRONTEND_URL,
+  'https://portfolio-showcase-57ey.vercel.app',
+  'https://portfolio-showcase-57ey-9l0bb7aby-faizan-jahangirs-projects.vercel.app',
+  'http://localhost:5173',
+  'http://localhost:3000',
+].filter(Boolean).map(origin => origin.replace(/\/$/, '')); // Remove trailing slashes
+
+app.use(cors({
+  origin: (origin, callback) => {
+    console.log('Incoming origin:', origin);
+    console.log('Allowed origins:', allowedOrigins);
+    
+    // Allow requests with no origin (like mobile apps, curl, etc.)
+    if (!origin) {
+      console.log('No origin provided - allowing request');
+      return callback(null, true);
+    }
+    
+    // Remove trailing slash from incoming origin for comparison
+    const normalizedOrigin = origin.replace(/\/$/, '');
+    
+    if (allowedOrigins.includes(normalizedOrigin)) {
+      console.log('Origin allowed:', normalizedOrigin);
+      callback(null, true);
+    } else {
+      console.log('Origin blocked:', normalizedOrigin);
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+}));
+
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
