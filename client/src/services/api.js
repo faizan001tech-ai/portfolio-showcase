@@ -20,6 +20,14 @@ const api = axios.create({
 });
 
 api.interceptors.request.use((config) => {
+  console.log('=== AXIOS REQUEST ===');
+  console.log('Request URL:', config.url);
+  console.log('Request baseURL:', config.baseURL);
+  console.log('Full URL:', config.baseURL ? config.baseURL + config.url : config.url);
+  console.log('Request method:', config.method);
+  console.log('Request params:', config.params);
+  console.log('=== END REQUEST ===');
+  
   const token = localStorage.getItem('token');
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;

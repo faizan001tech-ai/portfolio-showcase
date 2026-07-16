@@ -41,7 +41,19 @@ function ProjectsPage({ category, title, subtitle, seoPath }) {
         }
       })
       .catch((err) => {
-        console.error('Failed to fetch projects:', err);
+        console.error('=== FULL AXIOS ERROR ===');
+        console.error('Error object:', err);
+        console.error('Error message:', err.message);
+        console.error('Error code:', err.code);
+        console.error('Error config:', err.config);
+        console.error('Error config URL:', err.config?.url);
+        console.error('Error config baseURL:', err.config?.baseURL);
+        console.error('Error config params:', err.config?.params);
+        console.error('Error response:', err.response);
+        console.error('Error response status:', err.response?.status);
+        console.error('Error response data:', err.response?.data);
+        console.error('Error response headers:', err.response?.headers);
+        console.error('=== END AXIOS ERROR ===');
         setError('Failed to load projects. Please check your connection and try again.');
       })
       .finally(() => setLoading(false));
