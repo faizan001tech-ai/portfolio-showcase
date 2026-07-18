@@ -7,6 +7,7 @@ const cloudinary = require('cloudinary').v2;
 router.post('/', protect, upload.single('image'), async (req, res) => {
   try {
     if (!req.file) {
+      console.log('❌ No file uploaded');
       return res.status(400).json({ message: 'No file uploaded' });
     }
 
@@ -15,6 +16,7 @@ router.post('/', protect, upload.single('image'), async (req, res) => {
 
     console.log('✅ Image uploaded to Cloudinary:', {
       url: imageUrl,
+      public_id: req.file.public_id,
       filename: req.file.filename,
       size: req.file.size,
       category: req.body.category,
@@ -27,7 +29,7 @@ router.post('/', protect, upload.single('image'), async (req, res) => {
       fileName: req.file.filename,
     });
   } catch (error) {
-    console.error('❌ Upload error:', error);
+    console.error('❌ Upload error:', error.message);
     res.status(500).json({ success: false, message: error.message });
   }
 });

@@ -10,6 +10,12 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
+// Debug: Verify Cloudinary is configured
+console.log('🔧 Cloudinary Configuration:');
+console.log(`   Cloud Name: ${process.env.CLOUDINARY_CLOUD_NAME ? '✅ Set' : '❌ Missing'}`);
+console.log(`   API Key: ${process.env.CLOUDINARY_API_KEY ? '✅ Set' : '❌ Missing'}`);
+console.log(`   API Secret: ${process.env.CLOUDINARY_API_SECRET ? '✅ Set' : '❌ Missing'}`);
+
 // Configure Cloudinary Storage with category-based folders
 const storage = new CloudinaryStorage({
   cloudinary,
@@ -27,6 +33,8 @@ const storage = new CloudinaryStorage({
     };
 
     const folder = folderMap[category] || 'portfolio';
+
+    console.log(`📁 Upload to Cloudinary folder: ${folder}`);
 
     return {
       folder,
