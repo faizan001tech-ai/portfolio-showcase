@@ -78,7 +78,7 @@ export default function ManageProjects() {
 
       {/* Filter Tabs */}
       <div className="flex gap-2 mb-6 flex-wrap">
-        {['all', 'frontend', 'fullstack'].map((f) => (
+        {['all', 'frontend', 'fullstack', 'ai', 'mini'].map((f) => (
           <button
             key={f}
             onClick={() => setFilter(f)}
@@ -221,6 +221,8 @@ export default function ManageProjects() {
                 <select value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })} className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:border-orange-500/50">
                   <option value="frontend">Frontend</option>
                   <option value="fullstack">Full Stack</option>
+                  <option value="ai">AI</option>
+                  <option value="mini">Mini</option>
                 </select>
               </div>
               <div className="flex items-end">
