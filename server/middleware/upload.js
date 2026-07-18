@@ -10,14 +10,30 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-// Configure Cloudinary Storage
+// Configure Cloudinary Storage with category-based folders
 const storage = new CloudinaryStorage({
   cloudinary,
-  params: {
-    folder: 'portfolio',
-    allowed_formats: ['jpg', 'jpeg', 'png', 'gif', 'webp'],
-    resource_type: 'auto',
-    quality: 'auto:good',
+  params: (req, file) => {
+    // Get category from request body, default to 'general'
+    const category = req.body?.category || 'general';
+    
+    // Map categories to folders
+    const folderMap = {
+      frontend: 'portfolio/frontend',
+      fullstack: 'portfolio/fullstack',
+      ai: 'portfolio/ai',
+      mini: 'portfolio/mini',
+      general: 'portfolio',
+    };
+
+    const folder = folderMap[category] || 'portfolio';
+
+    return {
+      folder,
+      allowed_formats: ['jpg', 'jpeg', 'png', 'gif', 'webp'],
+      resource_type: 'auto',
+      quality: 'auto:good',
+    };
   },
 });
 
