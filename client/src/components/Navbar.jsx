@@ -8,6 +8,7 @@ const navLinks = [
   { path: '/frontend-projects', label: 'Frontend' },
   { path: '/fullstack-projects', label: 'Fullstack' },
   { path: '/ai-projects', label: 'AI' },
+  { path: '/mini-projects', label: 'Mini' },
   { path: '/resume', label: 'Resume' },
 ];
 

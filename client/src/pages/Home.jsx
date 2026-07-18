@@ -51,6 +51,14 @@ const projectCategories = [
     image: '/dashboard.png',
     description: 'Intelligent applications powered by LLMs, RAG pipelines, vector databases, and modern AI tooling.',
   },
+  {
+    title: 'Mini Projects',
+    count: 'projects',
+    key: 'mini',
+    icon: FaWrench,
+    image: '/mini-projects.png',
+    description: 'Quick projects demonstrating core programming concepts and practical solutions.',
+  },
 ];
 
 const techArsenal = [
