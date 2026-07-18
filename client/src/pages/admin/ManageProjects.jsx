@@ -31,6 +31,7 @@ export default function ManageProjects() {
     setUploading(true);
     const formData = new FormData();
     formData.append('image', file);
+    formData.append('category', form.category); // Send category for folder organization
     try {
       const res = await api.post('/upload', formData, { headers: { 'Content-Type': 'multipart/form-data' } });
       setForm({ ...form, image: res.data.imageUrl });
