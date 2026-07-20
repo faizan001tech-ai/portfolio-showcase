@@ -2,6 +2,7 @@ const Project = require('../models/Project');
 const ApiError = require('../utils/ApiError');
 const ApiResponse = require('../utils/ApiResponse');
 const asyncHandler = require('../utils/asyncHandler');
+const { sanitizeProject, sanitizeProjects } = require('../utils/urlSanitizer');
 
 exports.getAll = asyncHandler(async (req, res) => {
   const { category, search, sort, page = 1, limit = 12 } = req.query;
@@ -17,24 +18,39 @@ exports.getAll = asyncHandler(async (req, res) => {
     Project.countDocuments(filter),
   ]);
 
-  res.json(new ApiResponse(200, 'Projects fetched', { projects, total, page: parseInt(page), pages: Math.ceil(total / parseInt(limit)) }));
+  // Sanitize all project image URLs to ensure HTTPS
+  const sanitizedProjects = sanitizeProjects(projects);
+
+  res.json(new ApiResponse(200, 'Projects fetched', { projects: sanitizedProjects, total, page: parseInt(page), pages: Math.ceil(total / parseInt(limit)) }));
 });
 
 exports.getOne = asyncHandler(async (req, res) => {
   const project = await Project.findById(req.params.id);
   if (!project) throw new ApiError(404, 'Project not found');
-  res.json(new ApiResponse(200, 'Project fetched', { project }));
+  
+  // Sanitize project image URL to ensure HTTPS
+  const sanitizedProject = sanitizeProject(project);
+  
+  res.json(new ApiResponse(200, 'Project fetched', { project: sanitizedProject }));
 });
 
 exports.create = asyncHandler(async (req, res) => {
   const project = await Project.create(req.body);
-  res.status(201).json(new ApiResponse(201, 'Project created', { project }));
+  
+  // Sanitize project image URL to ensure HTTPS
+  const sanitizedProject = sanitizeProject(project);
+  
+  res.status(201).json(new ApiResponse(201, 'Project created', { project: sanitizedProject }));
 });
 
 exports.update = asyncHandler(async (req, res) => {
   const project = await Project.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
   if (!project) throw new ApiError(404, 'Project not found');
-  res.json(new ApiResponse(200, 'Project updated', { project }));
+  
+  // Sanitize project image URL to ensure HTTPS
+  const sanitizedProject = sanitizeProject(project);
+  
+  res.json(new ApiResponse(200, 'Project updated', { project: sanitizedProject }));
 });
 
 exports.delete = asyncHandler(async (req, res) => {

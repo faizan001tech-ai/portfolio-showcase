@@ -2,6 +2,10 @@ const express = require('express');
 const router = express.Router();
 const ctrl = require('../controllers/projectController');
 const protect = require('../middleware/auth');
+const { sanitizeImageUrls } = require('../utils/urlSanitizer');
+
+// Apply URL sanitization to all incoming requests to prevent HTTP URLs
+router.use(sanitizeImageUrls);
 
 router.get('/', ctrl.getAll);
 router.get('/:id', ctrl.getOne);
